@@ -1,0 +1,130 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Basic" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <style>
+        body {
+            margin: 0;
+            font-family: Basic;
+        }
+        .navbar {
+            color: white;
+            background-color: #1A237E;
+            padding: 15px;
+            font-size: 1.5em;
+            text-transform: capitalize;
+            display: flex;
+            justify-content: space-between;
+        }
+        .nav-items {
+            display: grid;
+            grid-gap: 20px;
+            grid-template: 1fr / 1fr 1fr;
+        }
+        .nav-item {
+
+        }
+        .contents {
+            display: grid;
+            grid-gap: 30px;
+            padding: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .card {
+            height: 300px;
+            border: 2px solid black;
+            border-radius: 10px;
+            /*margin: 15px;*/
+            /*display: flex;*/
+            background-color: white;
+            box-shadow: 5px 5px 5px #cccccc;
+        }
+        .image {
+            padding: 10px;
+        }
+        .card img {
+            width: 100%;
+            height: 60%;
+            object-fit: contain;
+        }
+        .description {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            padding: 15px;
+            background-color: #E8EAF6;
+            border-radius: 0 0 10px 10px;
+        }
+    </style>
+    <body>
+        <script type="text/comment">
+            promote users with high engagement
+            within users with the same engagement, distribute usage as evenly as possible
+            have the platform be a place where people browse for referral codes kinda like wish
+            users request a code after browsing types of referral links, server side intelligently returns one
+            referral types are ranked by popularity or paid promotion
+            users can pay to boost their own links
+            we will integrate with the actual services to verify link usage
+        </script>
+        <script type="text/template" id="card-template">
+            <div class="card">
+                <div class="image">
+                    <img src="<%- referral.img %>">
+                </div>
+                <div class="description">
+                    <div> <%- referral.description %> </div>
+                    <button class="btn btn-light"><%- referral.button_text %></button>
+                </div>
+            </div>
+        </script>
+        <script>
+            $(function() {
+                data = [
+                    {
+                        "img": "uber.png",
+                        "title": "Uber",
+                        "button_text": "Get a free ride",
+                        "description": "Drive toward what matters to you",
+                    },
+                    {
+                        "img": "lyft.png",
+                        "title": "Lyft",
+                        "button_text": "Get a free ride",
+                        "description": "Investing on autopilot",
+                    },
+                    {
+                        "img": "wealthsimple.svg",
+                        "title": "Wealthsimple",
+                        "button_text": "Invest 5k w/o fees",
+                        "description": "Move the way you want",
+                    },
+                    {
+                        "img": "blue_apron.svg",
+                        "title": "Blue Apron",
+                        "button_text": "Get a free meal",
+                        "description": "Order our top-rated recipes today!",
+                    },
+                ]
+                const template = _.template($('#card-template').html())
+                for (let i = 0; i < 16; i++) {
+                    $('.contents').append(template({referral: data[i % 4]}))
+                }
+            });
+        </script>
+        <div class="navbar">
+            <div class="logo">Referee</div>
+            <div class="nav-items">
+                <div class="nav-item">Find Referrals</div>
+                <div class="nav-item">Your Referrals</div>
+            </div>
+        </div>
+        <div class="contents">
+        </div>
+    </body>
+</html>
